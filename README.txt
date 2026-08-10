@@ -1,96 +1,39 @@
-PORTAFOLIO HTML CON MODALES PARA GITHUB PAGES
-==============================================
+# Eric Somoza | Desarrollo Web y Soluciones Digitales
 
-Esta versión está hecha con:
+Soy desarrollador web enfocado en la creación de páginas profesionales, sistemas administrativos y soluciones digitales personalizadas para negocios, escuelas, instituciones y proyectos personales.
+
+Mi objetivo es ayudar a transformar ideas en plataformas funcionales, modernas y fáciles de usar, adaptadas a las necesidades de cada cliente.
+
+## ¿Qué puedo desarrollar?
+
+- Páginas web modernas y responsivas.
+- Portafolios personales o profesionales.
+- Sistemas administrativos.
+- Sistemas de gestión de ventas.
+- Portales institucionales.
+- Paneles de control y dashboards.
+- Interfaces web atractivas y funcionales.
+- Soluciones digitales personalizadas.
+
+## Tecnologías que utilizo
 
 - HTML
 - CSS
 - JavaScript
+- PHP
+- MySQL
+- Bootstrap
+- GitHub Pages
 
-No usa PHP, por eso sirve para GitHub Pages.
+## Sobre mi trabajo
 
-CAMBIOS INCLUIDOS
------------------
+Me enfoco en crear proyectos visualmente profesionales, organizados y fáciles de navegar. Cada desarrollo busca resolver una necesidad real, ya sea mostrar información, mejorar la presencia digital de un negocio o facilitar la administración de procesos internos.
 
-- Los proyectos ahora abren en modales profesionales.
-- Cada modal tiene carrusel de capturas.
-- Todo es responsivo para celular.
-- El formulario de contacto está listo para enviar mensajes a:
-  somozaeric01@gmail.com
-- Contacto visible:
-  +52 932 110 0099
-- Diseño oscuro tecnológico.
-- Animaciones y transiciones.
+En este portafolio encontrarás algunos de mis trabajos, capturas de proyectos realizados y ejemplos de las soluciones que puedo desarrollar.
 
-CAMBIAR CAPTURAS
-----------------
+## Contacto
 
-Reemplaza las imágenes en:
+Si necesitas una página web, sistema o solución digital, puedes contactarme:
 
-assets/img/proyectos/plantel-09/
-assets/img/proyectos/sistema-gestion/
-assets/img/proyectos/upc/
-
-Archivos actuales:
-
-captura-1.png
-captura-2.png
-captura-3.png
-
-Puedes reemplazarlos por:
-
-captura-1.png
-captura-2.png
-captura-3.png
-
-Si cambias extensión o nombre, edita también las rutas dentro de:
-
-assets/js/main.js
-
-CAMBIAR INFORMACIÓN DE PROYECTOS
---------------------------------
-
-Edita los datos en:
-
-assets/js/main.js
-
-Busca el objeto:
-
-const projects = { ... }
-
-Ahí puedes cambiar:
-
-- Nombre del proyecto
-- Descripción
-- Costo aproximado
-- Estado
-- Tipo
-- Tecnologías
-- Rutas de imágenes
-
-CONTACTO
---------
-
-El formulario usa esta acción:
-
-https://formsubmit.co/somozaeric01@gmail.com
-
-Cuando lo subas a internet y alguien envíe el primer mensaje, puede llegar un correo de confirmación para activar la recepción.
-
-SUBIR A GITHUB PAGES
---------------------
-
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a Settings.
-4. Ve a Pages.
-5. Selecciona Deploy from a branch.
-6. Selecciona main y root.
-7. Guarda.
-
-
-CAMBIO NUEVO
-------------
-- Se eliminaron los botones visibles de correo, teléfono y WhatsApp que aparecían al lado del formulario.
-- Las imágenes de proyectos ahora usan extensión .png.
-- Reemplaza captura-1.png, captura-2.png y captura-3.png por tus capturas reales en cada carpeta de proyecto.
+**Correo:** somozaeric01@gmail.com  
+**Teléfono / WhatsApp:** +52 932 110 0099
