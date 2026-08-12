@@ -7,6 +7,7 @@
   <meta name="description" content="Portafolio profesional de Eric Somoza Villarreal. Desarrollo web, sistemas administrativos y proyectos digitales.">
   <meta name="theme-color" content="#080a0f">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/contact-api.css">
 </head>
 <body>
   <div class="page-glow glow-one"></div>
@@ -123,7 +124,7 @@
         <div class="projects-grid">
           <article class="project-preview reveal">
             <div class="project-thumb">
-              <img src="assets/img/proyectos/plantel-09/captura-1.png" alt="Vista previa Plantel 09">
+              <img src="assets/img/proyectos/plantel-09/Captura-1.png" alt="Vista previa Plantel 09">
             </div>
             <div class="project-preview-content">
               <span>Página / Sistema Web</span>
@@ -188,36 +189,63 @@
           </p>
         </div>
 
-        <form class="contact-form reveal delay-1" action="https://formsubmit.co/somozaeric01@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde mi portafolio">
-          <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="_captcha" value="false">
+        <form class="contact-form reveal delay-1" id="contactForm" method="POST" target="contactApiFrame">
+          <input type="hidden" name="request_id" id="contactRequestId">
+          <input type="hidden" name="pagina" id="contactPageUrl">
+
+          <div class="contact-honeypot" aria-hidden="true">
+            <label>
+              Empresa
+              <input type="text" name="empresa" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
 
           <label>
             Nombre
-            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="name" maxlength="80" required>
           </label>
 
           <label>
             Correo
-            <input type="email" name="correo" placeholder="tu@correo.com" required>
+            <input type="email" name="correo" placeholder="tu@correo.com" autocomplete="email" maxlength="120" required>
           </label>
 
           <label>
             Teléfono o WhatsApp
-            <input type="text" name="telefono" placeholder="+52..." required>
+            <input type="text" name="telefono" placeholder="+52..." autocomplete="tel" maxlength="40" required>
           </label>
 
           <label>
             Mensaje
-            <textarea name="mensaje" rows="5" placeholder="Cuéntame qué página o sistema necesitas..." required></textarea>
+            <textarea name="mensaje" rows="5" placeholder="Cuéntame qué página o sistema necesitas..." minlength="10" maxlength="3000" required></textarea>
           </label>
 
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          <button type="submit" class="btn btn-primary" id="contactSubmit">
+            <span class="contact-submit-text">Enviar mensaje</span>
+            <span class="contact-spinner" aria-hidden="true"></span>
+          </button>
+
+          <div class="contact-status" id="contactStatus" role="status" aria-live="polite" hidden>
+            <div class="contact-status-icon" id="contactStatusIcon" aria-hidden="true">✓</div>
+            <div>
+              <strong id="contactStatusTitle"></strong>
+              <p id="contactStatusMessage"></p>
+            </div>
+          </div>
+
           <p class="form-note">
-            Al primer envío puede pedirse una confirmación del correo para activar la recepción de mensajes.
+            Tu mensaje se envía de forma segura desde este portafolio. No se abrirá otra página.
           </p>
         </form>
+
+        <iframe
+          id="contactApiFrame"
+          name="contactApiFrame"
+          title="Procesador de formulario de contacto"
+          class="contact-api-frame"
+          tabindex="-1"
+          aria-hidden="true"
+        ></iframe>
       </div>
     </section>
   </main>
@@ -282,5 +310,6 @@
   <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/contact.js"></script>
 </body>
 </html>
