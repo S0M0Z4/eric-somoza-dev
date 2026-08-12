@@ -4,8 +4,7 @@
  * 2) Copia la URL que termina en /exec.
  * 3) Pégala abajo en GOOGLE_APPS_SCRIPT_URL.
  */
-const GOOGLE_APPS_SCRIPT_URL = 
- https://script.google.com/macros/s/AKfycbwew6DG6EaUW9Cl1QwKvqaNrnO7pBh584nDpooaGgOCIfaO9R6nbDLUU83dcuWgv1VD/exec
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwew6DG6EaUW9Cl1QwKvqaNrnO7pBh584nDpooaGgOCIfaO9R6nbDLUU83dcuWgv1VD/exec';
 
 (() => {
   const form = document.getElementById("contactForm");
