@@ -1,35 +1,48 @@
 /*
- * Contacto por Google Apps Script
- * 1) Despliega google-apps-script/Code.gs como Web App.
- * 2) Copia la URL que termina en /exec.
- * 3) Pégala abajo en GOOGLE_APPS_SCRIPT_URL.
+ * Formulario de contacto - Google Apps Script
+ * Portafolio Eric Somoza
+ *
+ * GitHub Pages -> fetch no-cors -> Apps Script -> Gmail
  */
-const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwew6DG6EaUW9Cl1QwKvqaNrnO7pBh584nDpooaGgOCIfaO9R6nbDLUU83dcuWgv1VD/exec';
+
+const GOOGLE_APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwew6DG6EaUW9Cl1QwKvqaNrnO7pBh584nDpooaGgOCIfaO9R6nbDLUU83dcuWgv1VD/exec";
 
 (() => {
   const form = document.getElementById("contactForm");
   const submitButton = document.getElementById("contactSubmit");
   const submitText = submitButton?.querySelector(".contact-submit-text");
+
   const statusBox = document.getElementById("contactStatus");
   const statusIcon = document.getElementById("contactStatusIcon");
   const statusTitle = document.getElementById("contactStatusTitle");
   const statusMessage = document.getElementById("contactStatusMessage");
+
   const requestIdInput = document.getElementById("contactRequestId");
   const pageUrlInput = document.getElementById("contactPageUrl");
 
-  if (!form || !submitButton || !submitText || !statusBox) return;
+  if (
+    !form ||
+    !submitButton ||
+    !submitText ||
+    !statusBox ||
+    !statusIcon ||
+    !statusTitle ||
+    !statusMessage
+  ) {
+    return;
+  }
 
-  let pendingRequestId = null;
-  let responseTimer = null;
-
-  const endpointReady = () => {
-    return /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/i.test(
+  const endpointReady = () =>
+    /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/i.test(
       GOOGLE_APPS_SCRIPT_URL.trim()
     );
-  };
 
   const makeRequestId = () => {
-    if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+    if (window.crypto?.randomUUID) {
+      return window.crypto.randomUUID();
+    }
+
     return `contact-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
   };
 
@@ -43,21 +56,16 @@ const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwew6DG6
     statusBox.hidden = false;
     statusBox.classList.remove("is-success", "is-error", "is-info");
     statusBox.classList.add(`is-${type}`);
-    statusIcon.textContent = type === "success" ? "✓" : type === "error" ? "!" : "…";
+
+    statusIcon.textContent =
+      type === "success" ? "✓" :
+      type === "error" ? "!" : "…";
+
     statusTitle.textContent = title;
     statusMessage.textContent = message;
   };
 
-  const finishRequest = () => {
-    setLoading(false);
-    pendingRequestId = null;
-    if (responseTimer) {
-      clearTimeout(responseTimer);
-      responseTimer = null;
-    }
-  };
-
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!form.reportValidity()) return;
@@ -65,62 +73,52 @@ const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwew6DG6
     if (!endpointReady()) {
       showStatus(
         "error",
-        "Falta conectar la API",
-        "Pega la URL /exec de tu Google Apps Script en assets/js/contact.js."
+        "API no configurada",
+        "La URL de Google Apps Script no es válida."
       );
       return;
     }
 
-    pendingRequestId = makeRequestId();
-    requestIdInput.value = pendingRequestId;
-    pageUrlInput.value = window.location.href;
-    form.action = GOOGLE_APPS_SCRIPT_URL;
+    if (requestIdInput) requestIdInput.value = makeRequestId();
+    if (pageUrlInput) pageUrlInput.value = window.location.href;
 
-    showStatus("info", "Enviando mensaje", "Estamos entregando tu mensaje a Eric.");
     setLoading(true);
 
-    // El POST se hace hacia un iframe oculto para evitar redirecciones y CORS.
-    HTMLFormElement.prototype.submit.call(form);
+    showStatus(
+      "info",
+      "Enviando mensaje",
+      "Estamos enviando tu mensaje. No cierres esta página."
+    );
 
-    responseTimer = window.setTimeout(() => {
-      if (!pendingRequestId) return;
-      finishRequest();
-      showStatus(
-        "error",
-        "No pude confirmar el envío",
-        "La respuesta está tardando demasiado. Intenta nuevamente en unos momentos."
-      );
-    }, 25000);
-  });
+    try {
+      const formData = new FormData(form);
 
-  window.addEventListener("message", (event) => {
-    const googleOrigin =
-      event.origin === "https://script.google.com" ||
-      event.origin === "https://script.googleusercontent.com" ||
-      /^https:\/\/[a-z0-9.-]+\.googleusercontent\.com$/i.test(event.origin);
+      await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+        cache: "no-store",
+        redirect: "follow"
+      });
 
-    if (!googleOrigin) return;
-
-    const data = event.data;
-    if (!data || data.source !== "eric-portfolio-mail-api") return;
-    if (!pendingRequestId || data.requestId !== pendingRequestId) return;
-
-    if (data.ok === true) {
       form.reset();
-      finishRequest();
+
       showStatus(
         "success",
         "¡Correo enviado con éxito!",
         "Estate atento a tu correo para recibir una respuesta."
       );
-      return;
-    }
 
-    finishRequest();
-    showStatus(
-      "error",
-      "No se pudo enviar el mensaje",
-      data.message || "Inténtalo nuevamente en unos momentos."
-    );
+    } catch (error) {
+      console.error("Error al enviar formulario:", error);
+
+      showStatus(
+        "error",
+        "No se pudo enviar el mensaje",
+        "Parece haber un problema de conexión. Inténtalo nuevamente."
+      );
+    } finally {
+      setLoading(false);
+    }
   });
 })();

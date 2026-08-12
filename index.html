@@ -7,7 +7,7 @@
   <meta name="description" content="Portafolio profesional de Eric Somoza Villarreal. Desarrollo web, sistemas administrativos y proyectos digitales.">
   <meta name="theme-color" content="#080a0f">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/contact-api.css">
+  <link rel="stylesheet" href="assets/css/contact-api.css?v=4">
 </head>
 <body>
   <div class="page-glow glow-one"></div>
@@ -124,7 +124,7 @@
         <div class="projects-grid">
           <article class="project-preview reveal">
             <div class="project-thumb">
-              <img src="assets/img/proyectos/plantel-09/captura-1.png" alt="Vista previa Plantel 09">
+              <img src="assets/img/proyectos/plantel-09/Captura-1.png" alt="Vista previa Plantel 09">
             </div>
             <div class="project-preview-content">
               <span>Página / Sistema Web</span>
@@ -189,7 +189,7 @@
           </p>
         </div>
 
-        <form class="contact-form reveal delay-1" id="contactForm" method="POST" target="contactApiFrame">
+        <form class="contact-form reveal delay-1" id="contactForm">
           <input type="hidden" name="request_id" id="contactRequestId">
           <input type="hidden" name="pagina" id="contactPageUrl">
 
@@ -237,15 +237,6 @@
             Tu mensaje se envía de forma segura desde este portafolio. No se abrirá otra página.
           </p>
         </form>
-
-        <iframe
-          id="contactApiFrame"
-          name="contactApiFrame"
-          title="Procesador de formulario de contacto"
-          class="contact-api-frame"
-          tabindex="-1"
-          aria-hidden="true"
-        ></iframe>
       </div>
     </section>
   </main>
@@ -310,6 +301,6 @@
   <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
 
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/contact.js"></script>
+  <script src="assets/js/contact.js?v=4"></script>
 </body>
 </html>
