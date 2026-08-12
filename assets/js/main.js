@@ -17,7 +17,7 @@ const projects = {
     type: "Proyecto web",
     tags: ["HTML", "CSS", "JavaScript", "PHP"],
     images: [
-      "assets/img/proyectos/plantel-09/Captura-1.png",
+      "assets/img/proyectos/plantel-09/captura-1.png",
       "assets/img/proyectos/plantel-09/captura-2.png",
       "assets/img/proyectos/plantel-09/captura-3.png",
       "assets/img/proyectos/plantel-09/captura-4.png",
